@@ -775,7 +775,7 @@ require('lazy').setup({
           return nil
         else
           return {
-            timeout_ms = 500,
+            timeout_ms = 3000,
             lsp_format = 'fallback',
           }
         end
@@ -791,6 +791,13 @@ require('lazy').setup({
         typescript = { 'prettier', stop_after_first = true },
         typescriptreact = { 'prettier', stop_after_first = true },
         javascriptreact = { 'prettier', stop_after_first = true },
+      },
+      formatters = {
+        prettier = {
+          -- Try local prettier first (with plugins), fallback to global
+          command = 'npx',
+          args = { 'prettier', '--stdin-filepath', '$FILENAME' },
+        },
       },
     },
   },
